@@ -22,8 +22,6 @@ class SpiderElTiempo(scrapy.Spider):
             print ('https://www.eltiempo.com' + str(link))
             print ('\n')
 
-        print (links_declassified)
-
         
 
  
