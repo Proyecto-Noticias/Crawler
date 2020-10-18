@@ -13,5 +13,5 @@ class NewsCrawlerScraperPipeline(object):
     def process_item(self, item, spider):
 
         create_item_api_url = os.environ['API_URL']
-        requests.post(create_item_api_url+'raw_articles/', data = json.dumps(ItemAdapter(item).asdict()))
+        requests.post(create_item_api_url+'articles/', data = json.dumps(ItemAdapter(item).asdict()))
         return item
