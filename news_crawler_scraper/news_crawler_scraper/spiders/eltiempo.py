@@ -20,7 +20,7 @@ class SpiderElTiempo(scrapy.Spider):
         'https://www.eltiempo.com/cultura'
     ]
     custom_settings = {
-        'FEED_URI': 'eltiempo.json',
+        #'FEED_URI': 'eltiempo.json',
         'FEED_FORMAT': 'json',
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
@@ -45,29 +45,32 @@ class SpiderElTiempo(scrapy.Spider):
         image_url = response.xpath('//div[@class="articulos"]//div[@class="figure-apertura-bk"]//meta[@itemprop="url"]/@content').get()
 
         category_translator = {
-            'politica': 'politics',
-            'deportes': 'sports',
-            'tecnosfera': 'technology',
-            'salud': 'health-lifestyle',
-            'vida': 'health-lifestyle',
-            'economia': 'economy',
-            'cultura': 'culture'
+            'politica': 1,
+            'deportes': 3,
+            'tecnosfera': 6,
+            'salud': 7,
+            'vida': 7,
+            'economia': 2,
+            'cultura': 4
         }
-        
-        category = category_translator[link.split('.com/')[1].split('/')[0]]
+        try:
+            category = category_translator[link.split('.com/')[1].split('/')[0]]
+        except KeyError:
+            print('Category not listed')
         date = pd.to_datetime('today')
 
 
         yield {
-            'articule_url': link,
+            'id': 0,
+            'article_url': link,
             'title': title.rstrip(),
-            'sulbtitle': subtitle.rstrip(),
+            'subtitle': subtitle.rstrip(),
             'article_date': article_date.strip(),
             'body': body,
             'image_url': image_url,
-            'category': category,
-            'journal_id': 0,
-            'scraping_date': date
+            'category_id': category,
+            'journal_id': 1,
+            'scraping_date': str(date)
         }
 
         
