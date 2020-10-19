@@ -46,7 +46,7 @@ class NewsCrawlerScraperPipeline(object):
         stats_dict = {
             'id': 0,
             'response_count': stats_body['downloader/response_count'],
-            'start_time': str(stats_body['start_time']),
+            'start_time': str(pd.to_datetime(str(stats_body['start_time'])).tz_localize('UTC').tz_convert('America/Bogota'))[:-6],
             'finish_time': str(pd.to_datetime('today')),
             'memory_usage_max': stats_body['memusage/max'],
             'total_articles_added': stats_body['total_articles_added'],
