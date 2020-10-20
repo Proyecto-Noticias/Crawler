@@ -19,9 +19,6 @@ class NewsCrawlerScraperPipeline(object):
 
         api_url = os.environ['API_URL']
         response = requests.post(api_url+'articles/', data = json.dumps(ItemAdapter(item).asdict()))
-        print('\n')
-        print('*'*30)
-        print(response.text)
         
         response_dict = json.loads(response.text)
 
@@ -50,7 +47,8 @@ class NewsCrawlerScraperPipeline(object):
             'finish_time': str(pd.to_datetime('today')),
             'memory_usage_max': stats_body['memusage/max'],
             'total_articles_added': stats_body['total_articles_added'],
-            'scraping_date': str(pd.to_datetime('today'))
+            'scraping_date': str(pd.to_datetime('today')),
+            'spider': str(spider.name)
         }
 
         api_url = os.environ['API_URL']

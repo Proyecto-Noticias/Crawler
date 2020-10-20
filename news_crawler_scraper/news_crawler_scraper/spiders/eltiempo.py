@@ -53,6 +53,7 @@ class SpiderElTiempo(scrapy.Spider):
             'economia': 2,
             'cultura': 4
         }
+        category = 8
         try:
             category = category_translator[link.split('.com/')[1].split('/')[0]]
         except KeyError:
@@ -70,7 +71,8 @@ class SpiderElTiempo(scrapy.Spider):
             'image_url': image_url,
             'category_id': category,
             'journal_id': 1,
-            'scraping_date': str(date)
+            'scraping_date': str(date),
+            'sentiment_classification': 'neutral'
         }
 
         
