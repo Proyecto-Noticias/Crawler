@@ -4,3 +4,4 @@ uvicorn
 requests
 pandas
 google-cloud-language
+beautifulsoup4

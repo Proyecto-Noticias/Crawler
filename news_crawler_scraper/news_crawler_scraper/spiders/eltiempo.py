@@ -2,7 +2,7 @@ import scrapy
 import pandas as pd
 # xpath
 # links = //div[@class="seccion"]//a[@class="boton page-link"]/@href
-# titlle = //div[@class="content_grid_margin"]//h1[@class="titulo"]/text()
+# title = //div[@class="content_grid_margin"]//h1[@class="titulo"]/text()
 # Subtite = //div[@class="content_grid_margin"]//div[@class="lead"]/p/text()
 # publication_date = //div[@class="articulo-autor"]//div[@class="fecha-publicacion-bk"]/span/text()
 # body = //div[@class="articulo-contenido"]//div[@class="modulos"]/p/text()

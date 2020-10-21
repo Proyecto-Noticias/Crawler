@@ -18,7 +18,7 @@ class NewsCrawlerScraperPipeline(object):
 
     def process_item(self, item, spider):
 
-        item['score'], item['magnitude'] = nlcloud.analyze_body(item['body'])
+        item['score'], item['magnitude'] = 0, 0#nlcloud.analyze_body(item['body'])
 
         if item['score']>-0.25 and item['score']<0.25:
             item['sentiment_classification'] = 'neutral'
