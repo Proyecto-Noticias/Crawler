@@ -71,8 +71,7 @@ class SpiderElTiempo(scrapy.Spider):
             'image_url': image_url,
             'category_id': category,
             'journal_id': 1,
-            'scraping_date': str(date),
-            'sentiment_classification': 'neutral'
+            'scraping_date': str(date)
         }
 
         
