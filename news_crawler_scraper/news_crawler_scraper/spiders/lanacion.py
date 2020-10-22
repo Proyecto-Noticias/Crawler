@@ -1,6 +1,8 @@
 import scrapy
 import pandas as pd
-from bs4 import BeautifulSoup
+
+from . import utils
+
 # xpath
 # links = //div[@id="wrapper"]//section[@class="listado"]/article/h2/a/@href
 # title = //div[@id="wrapper"]//article[@id="nota"]//h1/text()
@@ -27,24 +29,6 @@ class SpiderLaNacion(scrapy.Spider):
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
 
-    def format_body(self, text):
-        html_body = ''
-        for t in text:
-            html_body += str(t)
-
-        soup = BeautifulSoup(html_body, features="html.parser")
-
-        # get text
-        text = soup.get_text()
-
-        # break into lines and remove leading and trailing space on each
-        lines = (line.strip() for line in text.splitlines())
-        # break multi-headlines into a line each
-        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-        # drop blank lines
-        text = '\n'.join(chunk for chunk in chunks if chunk)
-
-        return text
 
     def parse(self, response):
         links = response.xpath('//div[@id="wrapper"]//section[@class="cuerpo"]//article//h2//a/@href').getall()
@@ -66,7 +50,7 @@ class SpiderLaNacion(scrapy.Spider):
         article_date = response.xpath('//div[@id="wrapper"]//div[@class="barra"]//section[@class="fecha"]/text()').get()
         body_html = response.xpath('//div[@id="wrapper"]//section[@id="cuerpo"]//p/descendant-or-self::*').getall()
 
-        body = self.format_body(body_html)
+        body = utils.format_body(body_html)
         
         image_url = response.xpath('//div[@id="wrapper"]//section[@id="cuerpo"]/figure//picture/source/@srcset').get()
 

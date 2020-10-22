@@ -1,5 +1,6 @@
 import scrapy
 import pandas as pd
+from . import utils
 # xpath
 # links = //div[@class="seccion"]//a[@class="boton page-link"]/@href
 # title = //div[@class="content_grid_margin"]//h1[@class="titulo"]/text()
@@ -36,11 +37,9 @@ class SpiderElTiempo(scrapy.Spider):
         title = response.xpath('//div[@class="content_grid_margin"]//h1[@class="titulo"]/text()').get()
         subtitle = response.xpath('//div[@class="content_grid_margin"]//div[@class="lead"]/p/text()').get()
         article_date = response.xpath('//div[@class="articulo-autor"]//div[@class="fecha-publicacion-bk"]/span/text()').get()
-        body_paragraphs = response.xpath('//div[@class="articulo-contenido"]//div[@class="modulos"]/p/text()').getall()
+        body_html = response.xpath('//div[@class="articulo-contenido"]//div[@class="modulos"]/p/text()').getall()
 
-        body = ""
-        for paragraph in body_paragraphs:
-            body = body + paragraph.rstrip() + '\n'
+        body = utils.format_body(body_html)
         
         image_url = response.xpath('//div[@class="articulos"]//div[@class="figure-apertura-bk"]//meta[@itemprop="url"]/@content').get()
 

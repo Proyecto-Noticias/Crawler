@@ -6,7 +6,7 @@ import os
 app = FastAPI()
 
 
-@app.get("/")
+@app.post("/eltiempo")
 def execute_spider():
-    os.system('python go_spider.py')
+    os.system('python go_spider_eltiempo.py')
     return {"Hello": "World"}
