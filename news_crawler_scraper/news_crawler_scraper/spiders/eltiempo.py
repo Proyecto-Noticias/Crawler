@@ -12,6 +12,7 @@ from . import utils
 class SpiderElTiempo(scrapy.Spider):
     name = 'eltiempo'
     start_urls = [
+        'https://www.eltiempo.com/cultura/entretenimiento',
         'https://www.eltiempo.com/politica',
         'https://www.eltiempo.com/deportes',
         'https://www.eltiempo.com/tecnosfera',
@@ -50,11 +51,18 @@ class SpiderElTiempo(scrapy.Spider):
             'salud': 7,
             'vida': 7,
             'economia': 2,
-            'cultura': 4
+            'cultura': 4,
+            'entretenimiento': 5
         }
         category = 8
         try:
-            category = category_translator[link.split('.com/')[1].split('/')[0]]
+            cat_str = link.split('.com/')[1].split('/')[0]
+            cat_str_ent = link.split('.com/')[1].split('/')[1]
+
+            if cat_str_ent=='entretenimiento':
+                category = 5
+            else:
+                category = category_translator[cat_str]
         except KeyError:
             print('Category not listed')
         date = pd.to_datetime('today')

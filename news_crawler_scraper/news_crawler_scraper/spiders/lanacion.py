@@ -61,7 +61,7 @@ class SpiderLaNacion(scrapy.Spider):
             'salud': 7,
             'vida': 7,
             'economia': 2,
-            'cultura': 4
+            'cultura': 5
         }
         category = 8
         try:
