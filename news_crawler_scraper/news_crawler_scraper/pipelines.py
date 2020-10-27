@@ -20,9 +20,9 @@ class NewsCrawlerScraperPipeline(object):
 
         item['score'], item['magnitude'] = nlcloud.analyze_body(item['body'])
 
-        if item['score']>-0.25 and item['score']<0.25:
+        if item['score']>-0 and item['score']<0.25:
             item['sentiment_classification'] = 'neutral'
-        if item['score']>=-1 and item['score']<=-0.25:
+        if item['score']>=-1 and item['score']<=0:
             item['sentiment_classification'] = 'negative'
         if item['score']>=0.25 and  item['score']<=1:
             item['sentiment_classification'] = 'positive'
