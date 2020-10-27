@@ -27,7 +27,7 @@ def execute_xataka_spider():
     return {"Status": "Xataka has been scraped!"}
 
 @app.post("/infobae")
-def execute_xataka_spider():
+def execute_infobae_spider():
     os.system('python go_spider_infobae.py')
     return {"Status": "Infobae has been scraped!"}
 

@@ -19,10 +19,18 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### System Variables
+```bash
+export API_URL="$DATASCIENCE_API_HOST/api/v1/"
+export GOOGLE_APPLICATION_CREDENTIALS="credentials.json"
+```
+
+
 ### Execution
 
 You can execute the crawler with a POST request, in that case you must start the uvicorn server:
 ```bash
+cd news_crawler_scraper
 uvicorn app.main:app --reload 
 ```
 
