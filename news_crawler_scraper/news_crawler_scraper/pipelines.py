@@ -9,7 +9,7 @@ import requests
 import json
 import pandas as pd
 from itemadapter import ItemAdapter
-from . import nlcloud
+from . import sentiment
 
 class NewsCrawlerScraperPipeline(object):
 
@@ -18,13 +18,15 @@ class NewsCrawlerScraperPipeline(object):
 
     def process_item(self, item, spider):
 
-        item['score'], item['magnitude'] = nlcloud.analyze_body(item['body'])
+        s = sentiment.get_polarity(sentiment.clean_text(item['body']))
 
-        if item['score']>-0 and item['score']<0.25:
+        item['score'], item['magnitude'] = s.polarity, s.subjectivity
+
+        if item['score']>0 and item['score']<0.2:
             item['sentiment_classification'] = 'neutral'
         if item['score']>=-1 and item['score']<=0:
             item['sentiment_classification'] = 'negative'
-        if item['score']>=0.25 and  item['score']<=1:
+        if item['score']>=0.2 and  item['score']<=1:
             item['sentiment_classification'] = 'positive'
 
         api_url = os.environ['API_URL']
