@@ -5,3 +5,4 @@ requests
 pandas
 google-cloud-language
 beautifulsoup4
+textblob
